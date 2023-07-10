@@ -21,11 +21,11 @@ export default function RecipeDetailsBox() {
     >
       <CardMedia
         sx={{
-          width: { xs: "100%", md: "40%" },
-          height: { xs: "10rem", md: "100%" },
+          width: { xs: "100%", md: "50%" },
+          // height: { xs: "10rem", md: "100%" },
         }}
         image="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        title="pancaces"
+        title="pancakes"
       />
       <Box
         sx={{
@@ -68,14 +68,23 @@ export default function RecipeDetailsBox() {
               gap: 4,
             }}
           >
-            <Typography sx={{ fontSize: { xs: 16, md: 18 } }} component="span">
+            <Typography
+              sx={{ fontSize: { xs: 16, md: 18 } }}
+              component="span"
+            >
               4 serving
             </Typography>
-            <Typography sx={{ fontSize: { xs: 16, md: 18 } }} component="span">
+            <Typography
+              sx={{ fontSize: { xs: 16, md: 18 } }}
+              component="span"
+            >
               600 kcal
             </Typography>
           </Box>
-          <Typography sx={{ fontSize: { xs: 18, md: 24 } }} component="span">
+          <Typography
+            sx={{ fontSize: { xs: 18, md: 24 } }}
+            component="span"
+          >
             Ingredients
           </Typography>
           <Box

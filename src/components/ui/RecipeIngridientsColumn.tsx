@@ -40,17 +40,23 @@ function createData(amount: string, ingredient: string): Data {
 const rows = [
   createData("500g", "flour"),
   createData("x1", "egg"),
-  createData("250g", "suggar"),
+  createData("250g", "sugar"),
 ];
 
-export default function ColumnGroupingTable() {
+export default function RecipeIngredientsColumn() {
   return (
-    <Paper sx={{ width: "25%" }}>
+    <Paper>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table
+          stickyHeader
+          aria-label="sticky table"
+        >
           <TableHead>
             <TableRow>
-              <TableCell align="center" colSpan={2}>
+              <TableCell
+                align="center"
+                colSpan={2}
+              >
                 Dough
               </TableCell>
             </TableRow>
@@ -58,7 +64,7 @@ export default function ColumnGroupingTable() {
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
-                  style={{ top: 57, minWidth: column.minWidth }}
+                  style={{ top: 57 }}
                 >
                   {column.label}
                 </TableCell>
