@@ -43,29 +43,20 @@ const rows = [
   createData("250g", "sugar"),
 ];
 
-export default function RecipeIngredientsColumn() {
+export const RecipeIngridientsColumn = () => {
   return (
     <Paper>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table
-          stickyHeader
-          aria-label="sticky table"
-        >
+        <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell
-                align="center"
-                colSpan={2}
-              >
+              <TableCell align="center" colSpan={2}>
                 Dough
               </TableCell>
             </TableRow>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ top: 57 }}
-                >
+                <TableCell key={column.id} style={{ top: 57 }}>
                   {column.label}
                 </TableCell>
               ))}
@@ -98,4 +89,4 @@ export default function RecipeIngredientsColumn() {
       </TableContainer>
     </Paper>
   );
-}
+};

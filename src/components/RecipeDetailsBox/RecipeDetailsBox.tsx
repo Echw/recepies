@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { Box, CardHeader, IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { grey } from "@mui/material/colors";
-import RecipeIngridientsColumn from "../ui/RecipeIngridientsColumn";
+import { RecipeIngridientsColumn } from "../ui/RecipeIngridientsColumn";
 
 export default function RecipeDetailsBox() {
   return (
