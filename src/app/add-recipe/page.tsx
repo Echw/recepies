@@ -1,13 +1,7 @@
-import RecipeDetailsBox from "@/components/RecipeDetailsBox/RecipeDetailsBox";
-import { RecipeStepDetails } from "@/components/ui/RecipeStepDetails";
+import { Recipe } from "./../../components/Recipe/Recipe";
 
 const AddRecipe = () => {
-  return (
-    <>
-      <RecipeDetailsBox />
-      <RecipeStepDetails />
-    </>
-  );
+  return <Recipe editMode={true} />;
 };
 
 export default AddRecipe;

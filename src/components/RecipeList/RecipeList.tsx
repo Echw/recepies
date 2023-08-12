@@ -1,34 +1,38 @@
 "use client";
-
-import * as React from "react";
+import { useEffect, useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import supabase from "@/utils/supabase";
-// import { useEffect, useState } from "react";
+import { Box, ListItemButton } from "@mui/material";
 
-export const RecipeList = async () => {
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [recipes, setRecipes] = useState<any>([]);
+export const RecipeList = () => {
+  const [recipes, setRecipes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const { data } = await supabase.from("recipies").select();
-  //     setRecipes(data);
-  //     // setIsLoading(false);
-  //   };
+  const fechRecipes = async () => {
+    setLoading(true);
+    try {
+      const { data } = await supabase.from("Recipes").select();
 
-  //   fetchPosts();
-  // }, []);
+      if (data) {
+        setRecipes(data);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // console.log(recipes);
-  // console.log(recipes?[0].name);
+  useEffect(() => {
+    fechRecipes();
+  }, []);
 
-  const { data: recipes } = await supabase.from("recipies").select();
+  if (loading) {
+    return <>Loading...</>;
+  }
 
   if (!recipes) {
     return <>No recipes</>;
@@ -41,20 +45,25 @@ export const RecipeList = async () => {
         width: "100%",
         margin: "1rem",
         bgcolor: "background.paper",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
       {recipes?.map((recipe) => (
-        <ListItem
+        <ListItemButton
           key={recipe.id}
           alignItems="flex-start"
           sx={{
             padding: 0,
-            width: "50rem",
+            width: "90%",
+            margin: "2rem",
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundImage:
               "url(https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
           }}
+          href={`/recipes/${recipe.id}`}
         >
           <ListItemText
             sx={{
@@ -66,12 +75,18 @@ export const RecipeList = async () => {
             }}
             primary={recipe.name}
             secondary={
-              <React.Fragment>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  flexDirection: "row",
+                }}
+              >
                 <Typography
                   sx={{ display: "inline-block" }}
                   component="span"
                   variant="body2"
-                  color="text.primary"
+                  color="white"
                 >
                   {recipe.servings} servings
                 </Typography>
@@ -79,14 +94,14 @@ export const RecipeList = async () => {
                   sx={{ display: "inline-block" }}
                   component="span"
                   variant="body2"
-                  color="text.primary"
+                  color="white"
                 >
                   {recipe.calories} calories
                 </Typography>
-              </React.Fragment>
+              </Box>
             }
           />
-        </ListItem>
+        </ListItemButton>
       ))}
     </List>
   );

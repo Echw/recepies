@@ -7,7 +7,11 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-export const RecipeItem = ({ recipe }): React.JSX.Element => {
+interface RecipeItemProps {
+  recipe: any;
+}
+
+export const RecipeItem = ({ recipe }: RecipeItemProps): React.JSX.Element => {
   return (
     <ListItem alignItems="flex-start">
       <ListItemAvatar>

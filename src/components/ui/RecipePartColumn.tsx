@@ -14,6 +14,10 @@ interface Column {
   minWidth?: number;
   format?: (value: number) => string;
 }
+interface RecipePartColumnProps {
+  part?: any;
+  editMode?: boolean;
+}
 
 const columns: Column[] = [
   {
@@ -43,7 +47,10 @@ const rows = [
   createData("250g", "sugar"),
 ];
 
-export const RecipeIngridientsColumn = () => {
+export const RecipePartColumn = ({
+  part,
+  editMode = false,
+}: RecipePartColumnProps) => {
   return (
     <Paper>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -51,7 +58,7 @@ export const RecipeIngridientsColumn = () => {
           <TableHead>
             <TableRow>
               <TableCell align="center" colSpan={2}>
-                Dough
+                {part.name ? part.name : "Ingredients"}
               </TableCell>
             </TableRow>
             <TableRow>
@@ -63,24 +70,18 @@ export const RecipeIngridientsColumn = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
+            {part.ingredients.map((ingredient: any) => {
               return (
                 <TableRow
                   hover
                   role="checkbox"
                   tabIndex={-1}
-                  key={row.ingredient}
+                  key={ingredient.id}
                 >
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id}>
-                        {column.format && typeof value === "number"
-                          ? column.format(value)
-                          : value}
-                      </TableCell>
-                    );
-                  })}
+                  <TableCell>{`${ingredient?.amount ?? ""} ${
+                    ingredient?.unit ?? ""
+                  }`}</TableCell>
+                  <TableCell>{`${ingredient?.ingredient ?? ""}`}</TableCell>
                 </TableRow>
               );
             })}
