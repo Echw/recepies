@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, TextField, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 interface RecipeStepDetailsProps {
   recipe?: any;
@@ -13,6 +13,14 @@ export const RecipeStepDetails = ({
   editMode = false,
 }: RecipeStepDetailsProps) => {
   // console.log(recipe.ingredients);
+
+  const [stepValues, setStepValues] = useState<string[]>([]);
+
+  const addStepField = () => {
+    const newStepKey = stepValues.length;
+    const updatedStepValues = [...stepValues, `Step ${newStepKey}`];
+    setStepValues(updatedStepValues);
+  };
 
   return (
     <Box
@@ -29,28 +37,21 @@ export const RecipeStepDetails = ({
       </Typography>
       {editMode ? (
         <Box>
-          <TextField
-            id="outlined-multiline-static"
-            label="Multiline"
-            multiline
-            rows={4}
-            defaultValue="Add new step"
-          />
+          {stepValues.map((element, index) => (
+            <TextField
+              key={index}
+              id={`outlined-multiline-static-${index}`}
+              label={`Step ${index + 1}`}
+              multiline
+              rows={4}
+              defaultValue={`Add description`}
+              fullWidth
+            />
+          ))}
           <Box>
-            <Typography variant="h6" color="text.secondary">
-              STEP III
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Integer hendrerit mauris id turpis consequat molestie. Mauris dui
-              massa, blandit eu neque sed, porta congue risus. Aenean vitae
-              tortor sapien. Nulla sed mauris consectetur, vestibulum est non,
-              volutpat purus. Sed euismod lorem id nisl vehicula egestas. Donec
-              rutrum augue et nulla pharetra pharetra. Nunc mi turpis, varius eu
-              lacus quis, dignissim suscipit erat. Sed faucibus erat vitae
-              placerat tempor. Nam vitae ante ligula. Mauris a tortor cursus,
-              vehicula quam sit amet, maximus leo. Fusce eget tempor tellus, a
-              commodo orci.
-            </Typography>
+            <Button variant="text" onClick={addStepField}>
+              + Add new step
+            </Button>
           </Box>
         </Box>
       ) : (

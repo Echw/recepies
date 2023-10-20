@@ -107,9 +107,9 @@ export const RecipeDetailsBox = ({
               gap: 5,
             }}
           >
-            {recipe.parts.map((part: any) => (
+            {/* {recipe.parts.map((part: any) => (
               <RecipePartColumn part={part} key={part.id} editMode={editMode} />
-            ))}
+            ))} */}
           </Box>
         </CardContent>
       </Box>
